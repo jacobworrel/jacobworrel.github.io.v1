@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="./../../css/styles.css">
+    <link rel="stylesheet" href="./../../css/article.css">
+  </head>
+  <body>
+    <div class="container">
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="./../index.html">Jacob Worrel</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="./../projects.html">Projects</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="./../writing.html">Writing</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="./../contact.html">Contact</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+      <div class="jumbotron">
+        <article class="blog">
+        <h2>ES6 Arrow Function | What Not To Do</h2>
+        <p class="intro">ES6 arrow functions (aka fat arrow notation) is a powerful new way of writing functions in JavaScript. But in order to fully harness that power, it’s important to understand how these fat arrow functions behave differently than the regular ES5 function declarations most JavaScript developers are already familiar with. In this blog post, we’ll cover some of the mistakes to avoid when using this new function syntax, what happens to the ‘this’ and ‘arguments’ keyword inside fat arrow functions, as well as specific cases when not to use ES6 notation.</p>
+        <p>Everyone loves arrow functions. They’re clean, concise, and most importantly of all, they finally simplify some of the quirkiness surrounding the ‘this’ context in JavaScript. Developers no longer need to worry about binding the correct ‘this’ context to multiple nested functions or use the ‘that = this’ workaround, which resulted in slower and harder to reason about code. It’s no wonder fat arrow functions are the most popular ES6 feature.</p>
+        <img src="./img/most-popular-es6-features.png" alt="Most Popular ES6 Features JavaScript">
+        <p>However, despite the awesomeness of arrow functions, there are some things you should know before you begin swapping out your boring, old ES5 functions for their new and improved ES6 counterparts.
+So when might one want to use this new JavaScript function syntax? One of the main places you’re going to see fat arrow functions being used is as callbacks:</p>
+
+<!-- CODE SNIPPET-->
+<div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #408080; font-style: italic">//ES5</span>
+array.map(<span style="color: #008000; font-weight: bold">function</span>(item) {
+  <span style="color: #008000; font-weight: bold">return</span> item <span style="color: #666666">*</span> <span style="color: #666666">2</span>;
+}
+<span style="color: #408080; font-style: italic">//ES6</span>
+array.map(item <span style="color: #666666">=&gt;</span> item <span style="color: #666666">*</span> <span style="color: #666666">2</span>);
+</pre></div>
+<!-- END CODE SNIPPET-->
+        <p>Thanks to the implicit return (which allows us to omit the curly brackets and the return statement when the function body fits on one line), and the fact that we can leave out the parentheses around arguments when there is only one of them, what we previously had to write in three lines of code can now be written in one. Yay!</p>
+        <h4>Define your functions before you invoke them</h4>
+        <p>But what about when you don’t want to write an anonymous function? With ES5, you can choose between a function declaration and a function expression, but with ES6, you have no choice but to declare your functions as expressions.</p>
+<!-- CODE SNIPPET-->
+<div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #408080; font-style: italic">//ES5 function declaration</span>
+<span style="color: #008000; font-weight: bold">function</span> multiplyBy2(arg) {
+  <span style="color: #008000; font-weight: bold">return</span> arg <span style="color: #666666">*</span> <span style="color: #666666">2</span>;
+}
+<span style="color: #408080; font-style: italic">//ES5 function expression</span>
+<span style="color: #008000; font-weight: bold">const</span> multiplyBy2 <span style="color: #666666">=</span> <span style="color: #008000; font-weight: bold">function</span>(arg) {
+  <span style="color: #008000; font-weight: bold">return</span> arg <span style="color: #666666">*</span> <span style="color: #666666">2</span>;
+}
+<span style="color: #408080; font-style: italic">//ES6 arrow function</span>
+<span style="color: #008000; font-weight: bold">const</span> multiplyBy2 <span style="color: #666666">=</span> arg <span style="color: #666666">=&gt;</span> arg <span style="color: #666666">*</span> <span style="color: #666666">2</span>
+</pre></div>
+<!-- END CODE SNIPPET-->
+        <p>So what does this mean? Well, if you’re used to writing ES5 function declarations (like in the 1st example above), you’ve probably gotten used to the entire function definition being hoisted and thus being able to invoke those functions before you actually write them in your code. This isn’t the case with arrow functions: if you’re going to use arrow functions by assigning them to a variable (like in the 3rd example above), you need to remember to define them before they’re invoked.</p>
+        <p>The fact that arrow function definitions aren’t hoisted is the first thing you’re going to have to get used to if you start using arrow functions more in your code. But there are other pitfalls to look out for.</p>
+<!-- CODE SNIPPET -->
+<div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #008000; font-weight: bold">class</span> Test {
+  constructor() {
+    <span style="color: #008000; font-weight: bold">this</span>.name <span style="color: #666666">=</span> <span style="color: #BA2121">&#39;Test constructor&#39;</span>;
+  }
+
+  method() {
+    <span style="color: #008000; font-weight: bold">const</span> func1 <span style="color: #666666">=</span> () <span style="color: #666666">=&gt;</span> {
+      console.log(<span style="color: #008000; font-weight: bold">this</span>); <span style="color: #408080; font-style: italic">//points to instance of Test class</span>
+    }
+    func1();
+
+    <span style="color: #008000; font-weight: bold">function</span> func2() {
+      console.log(<span style="color: #008000; font-weight: bold">this</span>); <span style="color: #408080; font-style: italic">//undefined</span>
+    }
+    func2();
+  }
+}
+<span style="color: #008000; font-weight: bold">const</span> test <span style="color: #666666">=</span> <span style="color: #008000; font-weight: bold">new</span> Test();
+test.method()
+</pre></div>
+<!-- END CODE SNIPPET -->
+        <p>The code above illustrates another very common case where you will want to use arrow functions: when you have a nested function that needs to access the ‘this’ context of the containing method sitting on an object. Previously, you would have had to use bind() or the ‘that’ = ‘this’ workaround to bind the ‘this’ context to the nested function, but now you can just let arrow functions do that work for you.</p>
+        <p>Most developers know about this feature of ES6 arrow functions but something less people are aware of is that arrow functions do not bind their own ‘arguments’ either. The following code will throw a reference error saying that ‘arguments’ is not defined:</p>
+<!-- CODE SNIPPET -->
+<div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #008000; font-weight: bold">const</span> func <span style="color: #666666">=</span> () <span style="color: #666666">=&gt;</span> {
+  console.log(arguments); <span style="color: #408080; font-style: italic">//reference error: &#39;arguments&#39; not defined</span>
+}
+</pre></div>
+<!-- END CODE SNIPPET -->
+        <p>With ES6 rest parameters now the standard way of getting an indefinite amount of arguments into an array that you can manipulate inside of the function scope, there’s arguably less need for the arguments object. However, there are still cases where you might need to use the arguments object for the additional functionality it offers that’s not provided by rest parameters. If that’s the case, you’ll want to make sure not to use arrow functions.</p>
+        <h4>Wrap parentheses around an object when using an implicit return</h4>
+        <p>Another potential point of confusion surrounding arrow functions is the need to wrap parentheses around an object when using an implicit return because it results in somewhat foreign-looking code:</p>
+<!-- CODE SNIPPET -->
+<div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #008000; font-weight: bold">const</span> func <span style="color: #666666">=</span> () <span style="color: #666666">=&gt;</span> ({ key<span style="color: #666666">:</span> <span style="color: #BA2121">&#39;value&#39;</span>});
+</pre></div>
+<!-- END CODE SNIPPET -->
+        <p>This is a common pattern in Redux where you’ll be writing a lot of functions that simply return object literals. But if this is your first time seeing this, you’re probably wondering what those parentheses are doing around the curly brackets.</p>
+        <p>To understand why the parentheses are needed, it helps to understand why omitting them wouldn’t work as expected:</p>
+<!-- CODE SNIPPET -->
+<div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #408080; font-style: italic">//Wrong</span>
+<span style="color: #008000; font-weight: bold">const</span> func <span style="color: #666666">=</span> () <span style="color: #666666">=&gt;</span> { key<span style="color: #666666">:</span> <span style="color: #BA2121">&#39;value&#39;</span> }; <span style="color: #408080; font-style: italic">//returns &#39;undefined&#39;</span>
+<span style="color: #408080; font-style: italic">//Correct</span>
+<span style="color: #008000; font-weight: bold">const</span> func <span style="color: #666666">=</span> () <span style="color: #666666">=&gt;</span> ({ key<span style="color: #666666">:</span> <span style="color: #BA2121">&#39;value&#39;</span>}); <span style="color: #408080; font-style: italic">//returns { key: &#39;value&#39; }</span>
+</pre></div>
+<!-- END CODE SNIPPET -->
+        <p>In the first example, the JavaScript interpreter is interpreting the curly brackets as the beginning of a new function block, and not a new object literal. And since no return statement is provided, it returns ‘undefined’.</p>
+        <p>In the second example, by wrapping the object literal in parentheses, it forces the interpreter to evaluate what’s inside as an expression and because of the implicit return, the object literal inside of the parentheses is returned.</p>
+        <h4>Arrow functions cannot be used as methods or constructors</h4>
+        <p>Two other situations where using  arrow functions just straight up won’t work is when you’re writing a constructor function or a method (unless you’re using Babel’s class properties transform plugin, but that’ll be the subject of a future blog post). For that, ES6 introduced ‘classes’, special functions that — much like arrow functions — provide a cleaner and more concise syntax for implementing JavaScript’s object-oriented inheritance model.</p>
+        <p>Because arrow functions are the newer way to write functions in ES6, you might be tempted (as I was) to swap out all your ES5 functions for the newer syntax. But before you do, it’s important to understand the differences between the two and what arrow functions are best suited for and when they might not be appropriate.</p>
+        <p>So to recap:</p>
+        <ul class="recap">
+          <li>arrow functions must be defined above where they’re being invoked</li>
+          <li>you cannot access the arguments object inside of an arrow function</li>
+          <li>if you’re using an implicit return to return an object out of an arrow function, wrap that object in parentheses</li>
+          <li>don’t use arrow functions for methods or constructors</li>
+        </ul>
+        <p>With everything they bring to the table, there’s no reason not to be using arrow functions. They help make your code cleaner and easier to reason about and if you follow the basic guidelines listed above, you’ll avoid some of the pitfalls I fell into when first trying to adopt them.</p>
+        <img src="./img/javascript-es6-arrow-functions.jpg" alt="ES6 Arrow Functions JavaScript">
+        </article>
+        <div class="social-container">
+          <ul class="list-inline">
+            <li><a href="https://github.com/jacobworrel/"><i class="fa fa-github fa-fw fa-2x"></i></a></li>
+            <li><a href="https://angel.co/jacob-worrel"><i class="fa fa-angellist fa-fw fa-2x"></i></a></li>
+            <li><a href="https://www.linkedin.com/in/jacobworrel"><i class="fa fa-linkedin fa-fw fa-2x"></i></a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="./../../js/main.js"></script>
+  </body>
+</html>
