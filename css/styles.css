@@ -24,3 +24,19 @@ body {
 .fa:hover {
   color: grey;
 }
+
+a {
+  color: #C04CF0;
+}
+
+a:hover {
+  color: #8D43F0;
+}
+
+.fa:hover {
+  color: #C04CF0;
+}
+
+.nav-item a:hover {
+  color: #000!important;
+}
