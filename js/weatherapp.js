@@ -47,7 +47,7 @@ $(document).ready(function(){
 						//default to blue for all other weather types
 						else $('body,html').addClass('blue');
 					}
-
+					$('.onoffswitch').css({'display': 'block'});
 					//toggle celsius/fahrenheit
 					$('#myonoffswitch').on('click', function(){
 						$('#temp').toggleClass('fahrenheit celsius');
