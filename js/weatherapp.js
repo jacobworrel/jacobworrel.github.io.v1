@@ -1,5 +1,6 @@
 $(document).ready(function(){
-	$.getJSON('http://ip-api.com/json', function(position){
+	$.getJSON('https://ip-api.com/json', function(position){
+		console.log('position -->', position)
 		var latitude = position.lat;
 		var longitude = position.lon;
 		var units = 'metric';
@@ -13,6 +14,7 @@ $(document).ready(function(){
 			'units': units
 		},
 			success: function(data) {
+				console.log('weather data -->', data)
 				var city = data.name;
 				var country = data.sys.country;
 				var tempC = Math.round(data.main.temp);
