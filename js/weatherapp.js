@@ -4,7 +4,7 @@ $(document).ready(function(){
 		var longitude = position.lon;
 		var units = 'metric';
 		$.ajax({
-			url: 'http://api.openweathermap.org/data/2.5/weather',
+			url: 'https://api.openweathermap.org/data/2.5/weather',
 			dataType: 'jsonp',
 			data: {
 			'lat': latitude,
