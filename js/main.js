@@ -1,19 +1,16 @@
 console.log('howdy ho!');
 
 $(document).ready(() => {
+  const path = window.location.pathname;
   //toggle active class for nav links
-  switch (window.location.pathname) {
-    case '/views/projects.html':
-        $('.active').removeClass('active');
-        $('#projects').addClass('active');
-        break;
-    case '/views/writing.html':
-        $('.active').removeClass('active');
-        $('#writing').addClass('active');
-        break;
-    case '/views/contact.html':
-        $('.active').removeClass('active');
-        $('#contact').addClass('active');
-        break;
+  if (path.includes('/views/projects.html')) {
+    $('.active').removeClass('active');
+    $('#projects').addClass('active');
+  } else if (path.includes('/views/writing.html') || path.includes('/views/articles')){
+    $('.active').removeClass('active');
+    $('#writing').addClass('active');
+  } else if (path.includes('/views/contact.html')) {
+    $('.active').removeClass('active');
+    $('#contact').addClass('active');
   }
 });
