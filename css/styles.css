@@ -37,6 +37,10 @@ a:hover {
   color: #C04CF0;
 }
 
+nav {
+  margin-top: 100px;
+}
+
 .nav-item a:hover {
   color: #000!important;
 }
