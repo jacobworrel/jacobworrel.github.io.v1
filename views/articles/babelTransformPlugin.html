@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Jacob Worrel | Writing</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="./../../css/styles.css">
+    <link rel="stylesheet" href="./../../css/article.css">
+  </head>
+  <body>
+    <div class="container">
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="./../../index.html">Jacob Worrel</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+              <a id="projects" class="nav-link" href="./../projects.html">Projects</a>
+            </li>
+            <li class="nav-item">
+              <a id="writing" class="nav-link" href="./../writing.html">Writing</a>
+            </li>
+            <li class="nav-item">
+              <a id="contact" class="nav-link" href="./../contact.html">Contact</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+      <div class="jumbotron">
+        <article class="blog">
+        <h2>Babel’s Transform Class Properties Plugin:</h2>
+        <h2>How it Works and What it Means for your React Apps</h2>
+        <img src="./img/babel-javascript-evolution.jpg" alt="JavaScript is Evolving">
+        <p class="intro">Babel is a powerful tool for writing next generation JavaScript. It’s widely used to compile code written with newer and experimental JavaScript features (as well as JSX in React apps) into syntax browsers can understand.</p>
+        <p class="intro">Developers no longer need to wait for recently added features  to get adopted by browsers or for promising new features to go through the lengthy TC39 process, where each proposal must get approved to move through various stages before finally getting added to the next ECMAScript spec. Thanks to a whole host of Babel presets and plugins, we can now write the JavaScript of tomorrow, today.</p>
+        <p class="intro">In this post, we’ll go over a particularly useful Babel plugin for your React apps and how you can use it to write cleaner, more concise code.</p>
+        <h4>Class Properties Transform</h4>
+        <p>If you’ve ever written a React app, you may have seen something along the lines of:</p>
+<!-- CODE SNIPPET-->
+<div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">constructor(props) {
+  <span style="color: #008000; font-weight: bold">super</span>(props);
+  <span style="color: #008000; font-weight: bold">this</span>.state <span style="color: #666666">=</span> { ...some initial state... }
+
+  <span style="color: #008000; font-weight: bold">this</span>.someHandler <span style="color: #666666">=</span> <span style="color: #008000; font-weight: bold">this</span>.someHandler.bind(<span style="color: #008000; font-weight: bold">this</span>);
+  <span style="color: #008000; font-weight: bold">this</span>.someHandler <span style="color: #666666">=</span> <span style="color: #008000; font-weight: bold">this</span>.someHandler.bind(<span style="color: #008000; font-weight: bold">this</span>);
+  <span style="color: #008000; font-weight: bold">this</span>.someHandler <span style="color: #666666">=</span> <span style="color: #008000; font-weight: bold">this</span>.someHandler.bind(<span style="color: #008000; font-weight: bold">this</span>);
+  <span style="color: #008000; font-weight: bold">this</span>.someHandler <span style="color: #666666">=</span> <span style="color: #008000; font-weight: bold">this</span>.someHandler.bind(<span style="color: #008000; font-weight: bold">this</span>);
+  <span style="color: #008000; font-weight: bold">this</span>.someHandler <span style="color: #666666">=</span> <span style="color: #008000; font-weight: bold">this</span>.someHandler.bind(<span style="color: #008000; font-weight: bold">this</span>);
+  <span style="color: #008000; font-weight: bold">this</span>.someHandler <span style="color: #666666">=</span> <span style="color: #008000; font-weight: bold">this</span>.someHandler.bind(<span style="color: #008000; font-weight: bold">this</span>);
+  <span style="color: #008000; font-weight: bold">this</span>.someHandler <span style="color: #666666">=</span> <span style="color: #008000; font-weight: bold">this</span>.someHandler.bind(<span style="color: #008000; font-weight: bold">this</span>);
+  <span style="color: #008000; font-weight: bold">this</span>.someHandler <span style="color: #666666">=</span> <span style="color: #008000; font-weight: bold">this</span>.someHandler.bind(<span style="color: #008000; font-weight: bold">this</span>);
+  <span style="color: #008000; font-weight: bold">this</span>.someHandler <span style="color: #666666">=</span> <span style="color: #008000; font-weight: bold">this</span>.someHandler.bind(<span style="color: #008000; font-weight: bold">this</span>);
+  <span style="color: #008000; font-weight: bold">this</span>.someHandler <span style="color: #666666">=</span> <span style="color: #008000; font-weight: bold">this</span>.someHandler.bind(<span style="color: #008000; font-weight: bold">this</span>);
+  <span style="color: #008000; font-weight: bold">this</span>.someHandler <span style="color: #666666">=</span> <span style="color: #008000; font-weight: bold">this</span>.someHandler.bind(<span style="color: #008000; font-weight: bold">this</span>);
+  <span style="color: #008000; font-weight: bold">this</span>.someHandler <span style="color: #666666">=</span> <span style="color: #008000; font-weight: bold">this</span>.someHandler.bind(<span style="color: #008000; font-weight: bold">this</span>);
+  <span style="color: #008000; font-weight: bold">this</span>.someHandler <span style="color: #666666">=</span> <span style="color: #008000; font-weight: bold">this</span>.someHandler.bind(<span style="color: #008000; font-weight: bold">this</span>);
+  <span style="color: #008000; font-weight: bold">this</span>.someHandler <span style="color: #666666">=</span> <span style="color: #008000; font-weight: bold">this</span>.someHandler.bind(<span style="color: #008000; font-weight: bold">this</span>);
+}
+</pre></div>
+<!-- END CODE SNIPPET-->
+        <p>Whoa! That’s a lot of handlers.*</p>
+        <p>And what a drag it is to have to individually bind the 'this' context to each of them just so they can be passed down as props and invoked somewhere further down the component tree. How many times have you forgotten to do this tedious task and gotten an error message saying “this.setState is not a function”? How many times have you looked at a piece of code like the one above and thought to yourself, “There’s gotta be a better way…”</p>
+        <p>Well, guess what? There is, thanks to Babel’s <a href="https://babeljs.io/docs/plugins/transform-class-properties/">Class Properties Transform plugin</a>…</p>
+        <p>According to the documentation, this plugin will transform class properties in such a way that you can define class properties using property initializer syntax (ie. by using the = assignment operator).</p>
+        <p>In JavaScript, current class syntax only allows for you to define <em>methods</em> inside of a class, nothing else.</p>
+<!-- CODE SNIPPET-->
+<div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #008000; font-weight: bold">class</span> Cat {
+  constructor(name, breed) {
+    <span style="color: #008000; font-weight: bold">this</span>.name <span style="color: #666666">=</span> name;
+    <span style="color: #008000; font-weight: bold">this</span>.breed <span style="color: #666666">=</span> breed;
+  }
+  getBreed() {
+    <span style="color: #008000; font-weight: bold">return</span> <span style="color: #008000; font-weight: bold">this</span>.name <span style="color: #666666">+</span> <span style="color: #BA2121">&#39; is a &#39;</span> <span style="color: #666666">+</span> <span style="color: #008000; font-weight: bold">this</span>.breed;
+  }
+}
+</pre></div>
+<!-- END CODE SNIPPET-->
+        <p>Any properties you want on an instance of an object created with a class need to be defined inside of the special constructor method, whereas any other methods defined in the class — like the getBreed() method in the example above — will live on that instance’s prototype.</p>
+        <p>But with Babel’s Class Properties Transform plugin, you no longer have to follow these rules, and instead can do something like this:</p>
+<!-- CODE SNIPPET-->
+<div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #008000; font-weight: bold">class</span> Cat {
+  name <span style="color: #666666">=</span> <span style="color: #BA2121">&quot;Chairman Meow&quot;</span>;
+  breed <span style="color: #666666">=</span> <span style="color: #BA2121">&quot;Sphynx&quot;</span>;
+
+  getBreed <span style="color: #666666">=</span> <span style="color: #008000; font-weight: bold">function</span>() {
+    <span style="color: #008000; font-weight: bold">return</span> <span style="color: #008000; font-weight: bold">this</span>.name <span style="color: #666666">+</span> <span style="color: #BA2121">&#39; is a &#39;</span> <span style="color: #666666">+</span> <span style="color: #008000; font-weight: bold">this</span>.breed;
+  }
+}
+</pre></div>
+<!-- END CODE SNIPPET -->
+        <p>In this version, the ‘name’ and ‘breed’ properties <em>as well as</em> the getBreed() method will live on the instance, whereas before getBreed() was on the prototype.</p>
+        <img src="./img/chairman-meow.jpg" alt="Chairman Meow">
+        <p>So how does this tie into React and not having to bind the 'this' context to every handler I want to pass down as a prop?</p>
+        <p>Well, because the = assignment operator won’t throw a syntax error anymore, what this allows you to do is write methods inside of an ES6 class using fat arrow notation. And since arrow functions do not create their own 'this' and use the value of the enclosing context instead, you no longer have to slavishly bind the 'this' context to every method you define inside your React component. (If you haven’t read my post about ES6 arrow functions, I recommend that you check it out to better understand where they should and shouldn’t be used.)</p>
+        <p>So with that said, we can now refactor our Cat class to look like this:</p>
+<!-- CODE SNIPPET-->
+<div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #008000; font-weight: bold">class</span> Cat {
+  name <span style="color: #666666">=</span> <span style="color: #BA2121">&quot;Chairman Meow&quot;</span>;
+  breed <span style="color: #666666">=</span> <span style="color: #BA2121">&quot;Sphynx&quot;</span>;
+
+  getBreed <span style="color: #666666">=</span> () <span style="color: #666666">=&gt;</span> {
+    <span style="color: #008000; font-weight: bold">return</span> <span style="color: #008000; font-weight: bold">this</span>.name <span style="color: #666666">+</span> <span style="color: #BA2121">&#39; is a &#39;</span> <span style="color: #666666">+</span> <span style="color: #008000; font-weight: bold">this</span>.breed;
+  }
+}
+</pre></div>
+<!-- END CODE SNIPPET -->
+        <p>…and BOOM! The 'this' context inside of the getBreed() method will always point to the appropriate instance of the Cat class.</p>
+        <h4>Using  Babel’s Transform Class Properties Plugin in Your React Apps</h4>
+        <p>So let’s imagine we’re building a simple React app that renders a bunch of cats, and when a user clicks on a cat, it will show an alert with a static message saying, “Hi there! I’m so cute and cuddly!”</p>
+        <p>The first thing we’ll need to do is create a container component where we’ll store all the state we’ll need (in this case, just an array of image urls and a string containing our static message). This component will handle rendering our individual Cat components as well as our business logic (ie. alerting the user of the message).</p>
+<!-- CODE SNIPPET -->
+<div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #008000; font-weight: bold">import</span> React, { Component } from <span style="color: #BA2121">&#39;react&#39;</span>;
+<span style="color: #008000; font-weight: bold">import</span> Cat from <span style="color: #BA2121">&#39;./Cat&#39;</span>;
+<span style="color: #008000; font-weight: bold">export</span> <span style="color: #008000; font-weight: bold">default</span> <span style="color: #008000; font-weight: bold">class</span> CatContainer <span style="color: #008000; font-weight: bold">extends</span> Component {
+  constructor(props) {
+    <span style="color: #008000; font-weight: bold">super</span>(props);
+    <span style="color: #008000; font-weight: bold">this</span>.state <span style="color: #666666">=</span> {
+      cats<span style="color: #666666">:</span> [
+        <span style="color: #BA2121">&#39;http://www.catphotos.org/wp-content/uploads/2013/02/cat-standing.jpg&#39;</span>,
+        <span style="color: #BA2121">&#39;http://www.catphotos.org/wp-content/uploads/2013/02/a-serious-1024x768.jpg&#39;</span>,
+        <span style="color: #BA2121">&#39;http://www.catphotos.org/wp-content/uploads/2013/02/white-cat-1-1024x768.jpg&#39;</span>
+      ],
+      msg<span style="color: #666666">:</span> <span style="color: #BA2121">&quot;Hi there! I&#39;m so cute and cuddly!&quot;</span>
+    }
+  }
+  showMessage <span style="color: #666666">=</span> () <span style="color: #666666">=&gt;</span> {
+    alert(<span style="color: #008000; font-weight: bold">this</span>.state.msg);
+  }
+render() {
+    <span style="color: #008000; font-weight: bold">const</span> cats <span style="color: #666666">=</span> <span style="color: #008000; font-weight: bold">this</span>.state.cats.map(url <span style="color: #666666">=&gt;</span> (
+      <span style="color: #666666">&lt;</span>Cat url<span style="color: #666666">=</span>{url} showMessage<span style="color: #666666">=</span>{<span style="color: #008000; font-weight: bold">this</span>.showMessage}<span style="color: #666666">/&gt;</span>
+    ));
+    <span style="color: #008000; font-weight: bold">return</span> (
+      <span style="color: #666666">&lt;</span>div<span style="color: #666666">&gt;</span>
+        {cats}
+      <span style="color: #666666">&lt;</span>div<span style="color: #666666">/&gt;</span>
+    )
+  }
+}
+</pre></div>
+<!-- END CODE SNIPPET -->
+          <p>Notice how I’m writing the showMessage() handler as an arrow function, and therefore don’t need to bind the 'this' context to it inside of my constructor. It just uses the value of its enclosing context, which in this case points to the CatContainer.</p>
+          <p>Now, all we need is our Cat component. Since all this component does is render JSX, we’ll go ahead and write it as a stateless functional component:</p>
+<!-- CODE SNIPPET -->
+<div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #008000; font-weight: bold">import</span> React from <span style="color: #BA2121">&#39;react&#39;</span>;
+<span style="color: #008000; font-weight: bold">const</span> Cat <span style="color: #666666">=</span> (props) <span style="color: #666666">=&gt;</span> {
+  <span style="color: #008000; font-weight: bold">return</span> (
+    <span style="color: #666666">&lt;</span>div<span style="color: #666666">&gt;</span>
+      <span style="color: #666666">&lt;</span>img src<span style="color: #666666">=</span>{props.url} onClick<span style="color: #666666">=</span>{props.showMessage}<span style="color: #666666">/&gt;</span>
+    <span style="color: #666666">&lt;</span>div<span style="color: #666666">/&gt;</span>
+  )
+}
+<span style="color: #008000; font-weight: bold">export</span> <span style="color: #008000; font-weight: bold">default</span> Cat;
+</pre></div>
+<!-- END CODE SNIPPET -->
+            <p>And now, when we click on a cat, our alert shows up as expected. Not, a TypeError saying “cannot read property ‘state’ of undefined”, just a nice little message from our cute and cuddly cat.</p>
+            <p>The Class Properties Transform is just one of many Babel plugins you can use to leverage the power of bleeding-edge JavaScript features. Another one I always throw into my .babelrc file for good measure is the <a href="https://babeljs.io/docs/plugins/transform-object-rest-spread/">Object Spread Rest Transform</a> (especially if I’m using Redux and writing lots of logic to reduce an old state object into a new state). At a recent talk given by <a href="https://twitter.com/krainboltgreene">@krainboltgreene</a>, I was introduced to the <a href="https://github.com/thejameskyle/babel-react-optimize">Babel React Optimize</a> preset, which basically parses your React code and implements a bunch of ways to optimize it (without you having to lift a finger).</p>
+            <p>JavaScript is evolving and tools like Babel are essential for keeping up with the rapid rate of change. If you haven’t already incorporated Babel into your developer workflow, play around with their suite of presets/plugins and see how it can help you write better, more modern code.</p>
+            <hr/>
+            <p>*If you have this many handlers inside one component, you probably want to rethink how you’re designing your component hierarchy. You could try implementing the <a href="https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0">container pattern</a>, like I’m doing in the cat app example above. This pattern makes use of container components (aka ‘smart’ components) at various levels of the app to handle your business logic. All your other components can then be written as stateless functional components (aka ‘presentational’ or ‘dumb’ components that are strictly concerned with rendering JSX). In conjunction with a state management library like Redux, this is a powerful way of writing maintainable code with a strong separation of concerns.</p>
+            <img id="row-of-cats" src="./img/cats-in-a-row.jpg" alt="Cats in a Row">
+        </article>
+        <div class="social-container">
+          <ul class="list-inline">
+            <li><a href="https://github.com/jacobworrel/"><i class="fa fa-github fa-fw fa-2x"></i></a></li>
+            <li><a href="https://angel.co/jacob-worrel"><i class="fa fa-angellist fa-fw fa-2x"></i></a></li>
+            <li><a href="https://www.linkedin.com/in/jacobworrel"><i class="fa fa-linkedin fa-fw fa-2x"></i></a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="./../../js/main.js"></script>
+  </body>
+</html>

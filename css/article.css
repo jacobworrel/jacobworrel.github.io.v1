@@ -1,8 +1,8 @@
-.blog > h2, h4 {
+.blog > h2, h3, h4 {
   font-weight: bold;
 }
 
-.blog > h2 {
+.blog > h2, h3 {
   text-align: center;
 }
 
@@ -21,4 +21,9 @@
 
 .recap > li {
   font-weight: bold;
+}
+
+#row-of-cats {
+  height: calc(60%);
+  width: calc(60%);
 }
