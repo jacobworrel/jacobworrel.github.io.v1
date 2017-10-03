@@ -3,18 +3,15 @@ console.log('howdy ho!');
 $(document).ready(() => {
   //toggle active class for nav links
   switch (window.location.pathname) {
-    case '/projects.html':
-        console.log('case 1 projects')
+    case '/views/projects.html':
         $('.active').removeClass('active');
         $('#projects').addClass('active');
         break;
-    case '/writing.html':
-        console.log('case 2 writing')
+    case '/views/writing.html':
         $('.active').removeClass('active');
         $('#writing').addClass('active');
         break;
-    case '/contact.html':
-        console.log('case 3 contact')
+    case '/views/contact.html':
         $('.active').removeClass('active');
         $('#contact').addClass('active');
         break;
