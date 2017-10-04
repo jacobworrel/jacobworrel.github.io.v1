@@ -7,7 +7,7 @@ body {
 }
 
 .social-container {
-  margin-top: 50px;
+  margin-top: 13px;
   text-align: center;
 }
 
@@ -37,16 +37,27 @@ a:hover {
   color: #C04CF0;
 }
 
+.avatar {
+  border-radius: 50%;
+  height: 100%;
+  width: 100%;
+}
+
 nav {
-  margin-top: 100px;
+  margin-top: 80px;
 }
 
 .nav-item a:hover {
   color: #000!important;
 }
 
-/*.large-font {
-  text-transform: uppercase;
-  font-weight: bold;
-  font-size: 22px;
-}*/
+.navbar-brand {
+  width: 5%;
+  height: 20%;
+}
+
+@media (max-width: 640px) {
+  .navbar-brand {
+    width: 10%;
+  }
+}
