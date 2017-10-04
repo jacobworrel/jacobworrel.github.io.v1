@@ -44,3 +44,9 @@ nav {
 .nav-item a:hover {
   color: #000!important;
 }
+
+/*.large-font {
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 22px;
+}*/
