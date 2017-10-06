@@ -50,4 +50,7 @@ nav {
   .nav-item {
     text-align: center;
   }
+  .tech-stack {
+    display: none;
+  }
 }

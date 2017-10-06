@@ -69,3 +69,9 @@
 .clip-text_twelve {
     background-image: url('./../assets/img/brand-background.jpg');
 }
+
+@media (max-width: 767px){
+  .clip-text {
+    font-size: 1.5em;
+  }
+}
