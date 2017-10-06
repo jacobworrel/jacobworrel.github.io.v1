@@ -4,7 +4,7 @@
 
 /* Clip text element */
 .clip-text {
-    font-size: 3em;
+    font-size: 2em;
     font-weight: bold;
     line-height: 1;
     position: relative;
@@ -67,5 +67,5 @@
 /* Background image from http://thepatternlibrary.com/ and http://lorempixel.com */
 
 .clip-text_twelve {
-    background-image: url(http://hd.wallpaperswide.com/thumbs/abstract_wallpaper_for_mac-t2.jpg);
+    background-image: url('./../assets/img/brand-background.jpg');
 }

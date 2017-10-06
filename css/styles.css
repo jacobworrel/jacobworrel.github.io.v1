@@ -37,27 +37,17 @@ a:hover {
   color: #C04CF0;
 }
 
-.avatar {
-  border-radius: 50%;
-  height: 100%;
-  width: 100%;
-}
-
 nav {
-  margin-top: 80px;
+  margin-top: 10px;
+  font-size: 18px;
 }
 
 .nav-item a:hover {
   color: #000!important;
 }
 
-.navbar-brand {
-  width: 5%;
-  height: 20%;
-}
-
-@media (max-width: 640px) {
-  .navbar-brand {
-    width: 10%;
+@media (max-width: 768px) {
+  .nav-item {
+    text-align: center;
   }
 }
