@@ -46,7 +46,7 @@ nav {
   color: #000!important;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   .nav-item {
     text-align: center;
   }
