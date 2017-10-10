@@ -24,7 +24,19 @@
   font-weight: bold;
 }
 
-.reduce-img {
-  height: calc(60%);
-  width: calc(60%);
+.reduce-lg {
+  height: 50%;
+  width: 50%;
+}
+
+.reduce-sm {
+  height: 80%;
+  width: 80%;
+}
+
+@media (max-width: 767px) {
+  .reduce-lg {
+    height: 70%;
+    width: 70%;
+  }
 }

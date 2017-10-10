@@ -41,7 +41,7 @@
         <p class="intro">Babel is a powerful tool for writing next generation JavaScript. It’s widely used to compile code written with newer and experimental JavaScript features (as well as JSX in React apps) into syntax browsers can understand.</p>
         <p class="intro">Developers no longer need to wait for recently added features  to get adopted by browsers or for promising new features to go through the lengthy TC39 process, where each proposal must get approved to move through various stages before finally getting added to the next ECMAScript spec. Thanks to a whole host of Babel presets and plugins, we can now write the JavaScript of tomorrow, today.</p>
         <p class="intro">In this post, we’ll go over a particularly useful Babel plugin for your React apps and how you can use it to write cleaner, more concise code.</p>
-        <img class="reduce-img" src="./img/babel-javascript-evolution.jpg" alt="JavaScript is Evolving">
+        <img class="reduce-sm" src="./img/babel-javascript-evolution.jpg" alt="JavaScript is Evolving">
         <h4>Class Properties Transform</h4>
         <p>If you’ve ever written a React app, you may have seen something along the lines of:</p>
 <!-- CODE SNIPPET-->
@@ -97,7 +97,7 @@
 </pre></div>
 <!-- END CODE SNIPPET -->
         <p>In this version, the ‘name’ and ‘breed’ properties <em>as well as</em> the getBreed() method will live on the instance, whereas before getBreed() was on the prototype.</p>
-        <img src="./img/chairman-meow.jpg" alt="Chairman Meow">
+        <img class="reduce-lg" src="./img/chairman-meow.jpg" alt="Chairman Meow">
         <p>So how does this tie into React and not having to bind the 'this' context to every handler I want to pass down as a prop?</p>
         <p>Well, because the = assignment operator won’t throw a syntax error anymore, what this allows you to do is write methods inside of an ES6 class using fat arrow notation. And since arrow functions do not create their own 'this' and use the value of the enclosing context instead, you no longer have to slavishly bind the 'this' context to every method you define inside your React component. (If you haven’t read my post about ES6 arrow functions, I recommend that you check it out to better understand where they should and shouldn’t be used.)</p>
         <p>So with that said, we can now refactor our Cat class to look like this:</p>
@@ -166,7 +166,7 @@ render() {
             <p>JavaScript is evolving and tools like Babel are essential for keeping up with the rapid rate of change. If you haven’t already incorporated Babel into your developer workflow, play around with their suite of presets/plugins and see how it can help you write better, more modern code.</p>
             <hr/>
             <p>*If you have this many handlers inside one component, you probably want to rethink how you’re designing your component hierarchy. You could try implementing the <a href="https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0">container pattern</a>, like I’m doing in the cat app example above. This pattern makes use of container components (aka ‘smart’ components) at various levels of the app to handle your business logic. All your other components can then be written as stateless functional components (aka ‘presentational’ or ‘dumb’ components that are strictly concerned with rendering JSX). In conjunction with a state management library like Redux, this is a powerful way of writing maintainable code with a strong separation of concerns.</p>
-            <img class="reduce-img" src="./img/cats-in-a-row.jpg" alt="Cats in a Row">
+            <img class="reduce-sm" src="./img/cats-in-a-row.jpg" alt="Cats in a Row">
         </article>
         <div class="social-container">
           <ul class="list-inline">
