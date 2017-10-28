@@ -6,12 +6,14 @@ body {
   background-color: white;
 }
 
-.portfolio {
+.portfolio, .news {
   list-style-type: none;
 }
 
 .tech-stack {
   margin-bottom: 0.5rem;
+  font-size: 13px;
+  color: #333;
 }
 
 .article {
@@ -64,5 +66,8 @@ nav {
   }
   .tech-stack {
     display: none;
+  }
+  .portfolio {
+    list-style-type: disc;
   }
 }
