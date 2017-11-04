@@ -9,9 +9,9 @@ $(document).ready(() => {
   } else if (path.includes('/views/writing.html') || path.includes('/views/articles')){
     $('.active').removeClass('active');
     $('#writing').addClass('active');
-  } else if (path.includes('/views/news.html')) {
+  } else if (path.includes('/views/readings.html')) {
     $('.active').removeClass('active');
-    $('#news').addClass('active');
+    $('#readings').addClass('active');
   } else if (path.includes('/views/contact.html')) {
     $('.active').removeClass('active');
     $('#contact').addClass('active');
